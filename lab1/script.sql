@@ -31,7 +31,7 @@ $$
                           join pg_catalog.pg_class pc on pg_attribute.attrelid = pc.oid
                           join pg_catalog.pg_namespace pn on pc.relnamespace = pn.oid                  
                     where attnum > 0
-                        and attrelid = table_to_find::regclass
+                        and attrelid = table_to_find
                         and pn.nspname = schema_to_find
 
         loop
