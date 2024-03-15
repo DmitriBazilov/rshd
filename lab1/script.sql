@@ -29,9 +29,11 @@ $$
                  from pg_attribute
                           join pg_catalog.pg_type pt on pg_attribute.atttypid = pt.oid
                           join pg_catalog.pg_class pc on pg_attribute.attrelid = pc.oid
-                          join pg_catalog.pg_namespace pn on pc.relnamespace = pn.oid and pn.nspname = schema_to_find
-                 where attnum > 0
-                   and attrelid = table_to_find::regclass
+                          join pg_catalog.pg_namespace pn on pc.relnamespace = pn.oid                  
+                    where attnum > 0
+                        and attrelid = table_to_find::regclass
+                        and pn.nspname = schema_to_find
+
         loop
             raise NOTICE '% % %', format('%*s', -5, d_ord_pos), format('%*s', -20, d_col_name), format('%*s', -20, concat('Type: ', d_col_type));
             for d_col_cons in select array_agg(oid) from pg_catalog.pg_constraint
